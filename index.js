@@ -7,6 +7,6 @@ const port = process.env.PORT || "8015";
 
 server.listen(port, () => {
     console.log(
-        `\n\n***************\nServer is listening intently on port: ${port}\n*********************\n\n`
+        `\n\n******************************************\nServer is listening intently on port: ${port}\n******************************************\n\n`
         )
 })

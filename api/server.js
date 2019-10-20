@@ -7,8 +7,8 @@ const server = express();
 server.use(express.json());
 
 server.get('/', (req, res) => {
-    res.send("WE ARE UP AND RUNNING!!")
-})
+    res.send(`WE ARE UP AND RUNNING!!`)
+});
 
 
 
