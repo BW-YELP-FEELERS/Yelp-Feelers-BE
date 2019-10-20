@@ -1,0 +1,38 @@
+{
+  "name": "Yelp-Feelers-BE",
+  "version": "1.0.0",
+  "description": "Yelp Feelers Repo for Steve",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "test": "cross-env DB_ENV=testing jest --watch",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BW-YELP-FEELERS/Yelp-Feelers-BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BW-YELP-FEELERS/Yelp-Feelers-BE/issues"
+  },
+  "homepage": "https://github.com/BW-YELP-FEELERS/Yelp-Feelers-BE#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "knex": "^0.19.5"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2",
+    "cross-env": "^6.0.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
