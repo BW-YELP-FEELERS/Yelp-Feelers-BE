@@ -1,5 +1,4 @@
 const db = require('../../../data/dbConfig');
-const user = require('../users/usersModel');
 
 module.exports = (userCreds) => {
     return db('yfusers')
