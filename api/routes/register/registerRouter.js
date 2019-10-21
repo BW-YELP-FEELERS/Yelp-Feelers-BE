@@ -12,7 +12,10 @@ router.post('/register', (req, res) => {
     .then(({id, username}) => {
         res.status(201).json({Message: `Successfully registered as: ${username}`, newuserid: id, username: res.username})
     })
-    .catch(err => {console.log(err)})
+    .catch(err => {
+        // response fires both when username is already in the database & if a username & password is not provided.
+        res.status(400).json({Message: `Did you provide a username & password?  It is also possible you have registered this username already.`, err})
+    })
     
 })
 

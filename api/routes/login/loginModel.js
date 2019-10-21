@@ -2,7 +2,7 @@ const db = require('../../../data/dbConfig');  // connect to db via dbConfig whi
 
 module.exports = (userCreds) => {
     return db('yfusers')
-    .select('username', 'password')
+    .select('username')
     .where('username', userCreds.username)
     .first()
 }
