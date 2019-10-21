@@ -2,9 +2,8 @@ const db = require('../../../data/dbConfig');
 const user = require('../users/usersModel');
 
 module.exports = (userCreds) => {
-    const {username, password} = userCreds
     return db('yfusers')
-    .insert({username, password})
+    .insert(userCreds, 'id')
     .then(([id]) => {
         return db('yfusers')
         .select('id', 'username')
@@ -12,13 +11,3 @@ module.exports = (userCreds) => {
         .first()
     })
 }
-
-// module.exports = (userCreds) => {
-//     return db('yfusers')
-//     .insert(userCreds)
-//     .then(([id]) => {
-//         return db('yfusers')
-//         .where({id})
-//         .first()  
-//     })
-// }
