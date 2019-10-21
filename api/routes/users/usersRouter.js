@@ -5,8 +5,7 @@ const users = require('./usersModel');
 router.get('/users', (req, res) => {
     users.getallusers()
     .then(users => {
-        // res.status(200).json({message: 'Fetch successful!', users})
-        res.send({message: 'Fetch successful!', users})
+        res.status(200).json({message: 'Fetch successful!', users})
     })
     .catch(err => {console.log(err)})
 })
