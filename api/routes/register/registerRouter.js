@@ -14,7 +14,7 @@ router.post('/register', (req, res) => {
     db(user)
 
     .then((newuser) => {
-        res.status(201).json({Message: `Successfully registered as: ${user.username}`, newuser})
+        res.status(201).json({Message: `Successfully registered as: ${newuser.id}`, newuser})
     })
     .catch(err => {
         console.log(err)
