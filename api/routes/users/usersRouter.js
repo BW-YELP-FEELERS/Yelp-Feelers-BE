@@ -14,7 +14,9 @@ router.get('/users/:id', (req, res) => {
     const {id} = req.params
     users.getuserbyid(id)
     .then(user => {
-        res.status(200).json({message: `User ${user.username} has been located!`, user })
+        user?
+        res.status(200).json({message: `User ${user.username} has been located!`, user }):
+        res.status(404).json({error: `User id: ${id} cannot be located; please verify you have the correct user id.` })
     })
 })
 

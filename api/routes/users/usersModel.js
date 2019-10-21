@@ -12,7 +12,7 @@ function getallusers(){
 
 function getuserbyid(userid){
     return db('yfusers')
-    .select('id', 'username', 'created_at')
+    .select('id', 'username', 'created_at', 'password')
     .where('id',userid)
     .first()
 }
