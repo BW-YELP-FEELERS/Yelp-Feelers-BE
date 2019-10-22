@@ -16,7 +16,7 @@ router.post('/login', (req, res) => {
                 username: user.username,
             }
             const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1h'})
-            res.status(200).json({message: `Successfully logged in! Welcome ${user.username}`,user, token})
+            res.status(200).json({message: `Successfully logged in! Welcome ${user.username}`,id: user.id , username: user.username, token})
         }else {
             res.status(400).json({error: 'credentials do not match'})
         }
