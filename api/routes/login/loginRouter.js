@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const login = require('./loginModel');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 
 router.post('/login', (req, res) => {
     const {username, password} = req.body; 
@@ -8,9 +10,16 @@ router.post('/login', (req, res) => {
     username && password ? 
     login({username, password})
     .then(user => {
-        user && bcrypt.compareSync(password, user.password)?
-        res.status(200).json({message: `Successfully logged in! Welcome ${user.username}`,user}):
-        res.status(400).json({error: 'credentials do not match'})
+        if(user && bcrypt.compareSync(password, user.password)){
+            const payload = {
+                subject: user.id,
+                username: user.username,
+            }
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1h'})
+            res.status(200).json({message: `Successfully logged in! Welcome ${user.username}`,user, token})
+        }else {
+            res.status(400).json({error: 'credentials do not match'})
+        }
     })
     .catch(err => {
         console.log(err)
