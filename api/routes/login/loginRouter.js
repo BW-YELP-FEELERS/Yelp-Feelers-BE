@@ -4,16 +4,15 @@ const jwt = require('jsonwebtoken');
 const login = require('./loginModel');
 
 
+
 router.post('/login', (req, res) => {
-    const currentuser = req.body; 
+    const {username, password} = req.body; 
     // confirm body contains username, password
     if(username && password){
-        login(currentuser)
+        login({username, password})
         .then(user => {
             // console.log("from login route", user)
-            // console.log("from login route currentuser password: ", currentuser.password)
-            // console.log("from login route database user password: ", user.password)
-            if(bcrypt.compareSync(currentuser.password, user.password)){
+            if(user && bcrypt.compareSync(password, user.password)){
                 const payload = {
                     id: user.id,
                     username: user.username,
@@ -30,7 +29,7 @@ router.post('/login', (req, res) => {
         })
     } else {
         res.status(400).json({message: 'Please provide a valid USERNAME and PASSWORD'})
-        username/password?  database login event    
+        // username/password?  database login event    
     }
 })
 
