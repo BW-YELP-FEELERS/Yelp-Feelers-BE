@@ -5,10 +5,10 @@ const login = require('./loginModel');
 
 
 router.post('/login', (req, res) => {
-    const {username, password} = req.body; 
+    const currentuser = req.body; 
     // confirm body contains username, password
     // if(username && password){
-        login({username, password})
+        login(currentuser)
         .then(user => {
             // console.log("from login route", user)
             if(user && bcrypt.compareSync(password, user.password)){
