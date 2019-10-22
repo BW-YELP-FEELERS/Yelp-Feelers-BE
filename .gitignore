@@ -99,3 +99,12 @@ public
 
 # TernJS port file
 .tern-port
+
+#SUCCESS POSTGRES SQL SCRIPT DATA FILE
+SUCCESS_POSTGRES_SQL_SCRIPT.js
+
+#test-data content file
+test-data.js
+
+#Raw data from Data Science Team 
+adjusted_reviews5kProperFORREALTHISTIME.json
