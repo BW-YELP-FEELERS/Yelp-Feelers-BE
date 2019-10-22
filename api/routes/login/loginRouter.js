@@ -11,7 +11,9 @@ router.post('/login', (req, res) => {
         login(currentuser)
         .then(user => {
             // console.log("from login route", user)
-            if(user && bcrypt.compareSync(password, user.password)){
+            // console.log("from login route currentuser password: ", currentuser.password)
+            // console.log("from login route database user password: ", user.password)
+            if(bcrypt.compareSync(currentuser.password, user.password)){
                 const payload = {
                     id: user.id,
                     username: user.username,
