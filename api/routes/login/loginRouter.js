@@ -6,13 +6,13 @@ const login = require('./loginModel');
 
 
 router.post('/login', (req, res) => {
-    const currentuser = req.body; 
+    const {username, password} = req.body; 
     // confirm body contains username, password
-    // if(currentuser.username && currentuser.password){
-        login(currentuser)
+    if(username && password){
+        login({username, password})
         .then(user => {
             // console.log("from login route", user)
-            if(bcrypt.compareSync(currentuser.password, user.password)){
+            if(user && bcrypt.compareSync(password, user.password)){
                 const payload = {
                     id: user.id,
                     username: user.username,
@@ -27,10 +27,10 @@ router.post('/login', (req, res) => {
             console.log(err)
             res.status(404).json({message: 'Invalid Credentials.  Please check your login credentials and try again.'})
         })
-    // } else {
-    //     res.status(400).json({message: 'Please provide a valid USERNAME and PASSWORD'})
-    //     // username/password?  database login event    
-    // }
+    } else {
+        res.status(400).json({message: 'Please provide a valid USERNAME and PASSWORD'})
+        // username/password?  database login event    
+    }
 })
 
 
