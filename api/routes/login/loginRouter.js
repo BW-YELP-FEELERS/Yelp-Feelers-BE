@@ -11,7 +11,6 @@ router.post('/login', (req, res) => {
     if(username && password){
         login({username, password})
         .then(user => {
-            // console.log("from login route", user)
             if(user && bcrypt.compareSync(password, user.password)){
                 const payload = {
                     id: user.id,
@@ -24,8 +23,7 @@ router.post('/login', (req, res) => {
             }
         })
         .catch(err => {
-            console.log(err)
-            res.status(404).json({message: 'Invalid Credentials.  Please check your login credentials and try again.'})
+            res.status(404).json({message: 'Invalid Credentials.  Please check your login credentials and try again.', err})
         })
     } else {
         res.status(400).json({message: 'Please provide a valid USERNAME and PASSWORD'})
