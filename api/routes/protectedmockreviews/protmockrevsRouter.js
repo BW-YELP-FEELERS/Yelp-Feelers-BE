@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('./mockrevsModel')
+const db = require('./protmockrevsModel')
 
 router.get('/reviews', (req, res) => {
     db.find()

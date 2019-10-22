@@ -11,6 +11,7 @@ const registerRoutes = require('./routes/register/registerRouter');
 const loginRoutes = require('./routes/login/loginRouter');
 const usersRoutes = require('./routes/users/usersRouter');
 const mockrevsRoutes = require('./routes/mockreviews/mockrevsRouter');
+const protmockrevsRoutes = require('./routes/protectedmockreviews/protmockrevsRouter');
 
 //import mw 
 const authenticate = require('../auth/auth');
@@ -18,7 +19,7 @@ const authenticate = require('../auth/auth');
 //middleware
 server.use(helmet(), cors(), express.json());
 server.use('/', registerRoutes, loginRoutes, usersRoutes, mockrevsRoutes)
-server.use('/auth', authenticate, mockrevsRoutes)
+server.use('/auth', authenticate, protmockrevsRoutes)
 
 server.get('/', (req, res) => {
     res.send(`WE ARE UP AND RUNNING!!`)
