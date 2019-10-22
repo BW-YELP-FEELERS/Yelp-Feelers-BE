@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const login = require('./loginModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const login = require('./loginModel');
 
 
 router.post('/login', (req, res) => {
@@ -10,9 +10,10 @@ router.post('/login', (req, res) => {
     if(username && password){
         login({username, password})
         .then(user => {
+            // console.log("from login route", user)
             if(user && bcrypt.compareSync(password, user.password)){
                 const payload = {
-                    subject: user.id,
+                    id: user.id,
                     username: user.username,
                 }
                 const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1h'})
