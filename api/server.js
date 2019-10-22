@@ -10,10 +10,11 @@ const server = express();
 const registerRoutes = require('./routes/register/registerRouter');
 const loginRoutes = require('./routes/login/loginRouter');
 const usersRoutes = require('./routes/users/usersRouter');
+const mockrevsRoutes = require('./routes/mockreviews/mockrevsRouter');
 
 //middleware
 server.use(helmet(), cors(), express.json());
-server.use('/', registerRoutes, loginRoutes, usersRoutes)
+server.use('/', registerRoutes, loginRoutes, usersRoutes, mockrevsRoutes)
 
 server.get('/', (req, res) => {
     res.send(`WE ARE UP AND RUNNING!!`)
