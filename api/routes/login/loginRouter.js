@@ -6,13 +6,13 @@ const login = require('./loginModel');
 
 
 router.post('/login', (req, res) => {
-    const {username, password} = req.body; 
+    const currentuser = req.body; 
     // confirm body contains username, password
-    if(username && password){
-        login({username, password})
+    if(currentuser.username && currentuser.password){
+        login(currentuser)
         .then(user => {
             // console.log("from login route", user)
-            if(user && bcrypt.compareSync(password, user.password)){
+            if(bcrypt.compareSync(currentuser.password, user.password)){
                 const payload = {
                     id: user.id,
                     username: user.username,
