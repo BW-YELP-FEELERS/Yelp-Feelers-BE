@@ -7,27 +7,28 @@ const jwt = require('jsonwebtoken');
 router.post('/login', (req, res) => {
     const {username, password} = req.body; 
     // confirm body contains username, password
-    username && password ? 
-    login({username, password})
-    .then(user => {
-        if(user && bcrypt.compareSync(password, user.password)){
-            const payload = {
-                subject: user.id,
-                username: user.username,
+    if(username && password){
+        login({username, password})
+        .then(user => {
+            if(user && bcrypt.compareSync(password, user.password)){
+                const payload = {
+                    subject: user.id,
+                    username: user.username,
+                }
+                const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1h'})
+                res.status(200).json({message: `Successfully logged in! Welcome ${user.username}`,username: user.username, token})
+            }else {
+                res.status(400).json({error: 'credentials do not match'})
             }
-            const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '1h'})
-            res.status(200).json({message: `Successfully logged in! Welcome ${user.username}`,username: user.username, token})
-        }else {
-            res.status(400).json({error: 'credentials do not match'})
-        }
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(404).json({message: 'Invalid Credentials.  Please check your login credentials and try again.'})
-    }) :
-    res.status(400).json({message: 'Please provide a valid USERNAME and PASSWORD'})
-    // username/password?  database login event
-    
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(404).json({message: 'Invalid Credentials.  Please check your login credentials and try again.'})
+        })
+    } else {
+        res.status(400).json({message: 'Please provide a valid USERNAME and PASSWORD'})
+        // username/password?  database login event    
+    }
 })
 
 
