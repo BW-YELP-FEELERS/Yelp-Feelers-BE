@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     const mytoken = req.get('Authorization');
     return mytoken ? jwt.verify(mytoken, jwtKey, (err, decodedmytoken) => {
         return err ? 
-        (res.status(401).json({err.name, err.expiredAt})):
+        (res.status(401).json({err})):
         (req.decoded = decodedmytoken),
         (next())  
     }):
