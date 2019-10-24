@@ -53,7 +53,7 @@ function getFavoritesByUserID(userid){
 // }
 
 // remove a favorite
-function removeFavorite(recordid){
+function removeFavorite(userid, recordid){
     return getFavoriteById(recordid)
     .then(record => {
         db('favorites as f')
