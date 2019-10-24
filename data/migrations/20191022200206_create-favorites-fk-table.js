@@ -6,18 +6,20 @@ exports.up = function(knex) {
         table.integer('user_id')
         .unsigned()
         .notNullable()
-
-        table.foreign('user_id')
         .references('id')
         .inTable('yfusers')
+        .onUpdate('CASCADE')
 
         table.integer('review_id')
         .unsigned()
         .notNullable()
-
-        table.foreign('review_id')
         .references('id')
-        .inTable('livereviews')    
+        .inTable('mockreviews')    
+        .onUpdate('CASCADE')
+
+        //  this is to protect our database from having two of the same combinations of FKs.
+        table.unique(['user_id', `review_id`])
+        // alternatively, could do table.primary({'user_id', 'review_id})
     });
 };
 

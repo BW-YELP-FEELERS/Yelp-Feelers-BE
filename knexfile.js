@@ -4,11 +4,28 @@ require('dotenv').config()
 
 module.exports = {
 
+  development: {
+    client: 'sqlite3',
+    connection: {
+      filename: './data/yftest.db3'
+    },
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds',
+    },
+    useNullAsDefault: true,
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      }
+    }
+  },
+
   // development: {
-  //   client: 'pg',
-  //   version: '7.12.1',
-  //   // connection: 'postgres://localhost:8012/yfusers',
-  //   connection: process.env.DB_URL,
+  //   client: 'sqlite3',
+  //   connection: process.env.DB_SQL,
   //   migrations: {
   //     directory: './data/migrations',
   //   },
@@ -17,17 +34,6 @@ module.exports = {
   //   },
   //   useNullAsDefault: true
   // },
-  development: {
-    client: 'sqlite3',
-    connection: process.env.DB_SQL,
-    migrations: {
-      directory: './data/migrations',
-    },
-    seeds: {
-      directory: './data/seeds',
-    },
-    useNullAsDefault: true
-  },
 
   testing: {
     client: 'sqlite3',

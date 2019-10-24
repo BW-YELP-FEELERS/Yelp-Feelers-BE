@@ -1,25 +1,48 @@
 const router = require('express').Router();
-const db = require('./favoritesModel');
+const favoritesdb = require('./favoritesModel');
 const usersdb = require('../users/usersModel')
 
-
-router.post('/:userid/favs/reviewid', (req, res) => {
+// POST a favorite!
+router.post('/users/:userid/favs/:reviewid', (req, res) => {
     const{userid, reviewid} = req.params
     return usersdb.getuserbyid(userid)
-        .then(user => {
-            return db.addFavorite(userid, reviewid)
-                .then(favs => {
-                res.status(201).json({Success: true}, favs)
-                .catch(err => {
-                    console.log(err) 
-                    res.status(400).json({message: 'you are doing something terribly wrong!'})
-                })
+        .then(founduser => {
+            favoritesdb.addFavorite(founduser.id, reviewid)
+            .then(response => {
+                // console.log(response)
+                res.status(201).json({success: true, message: 'Record added successfully!'})
+            })
+            .catch(err => {
+                // console.log(err) 
+                res.status(400).json({message: `It appears ${founduser.username} has already favorited the record with id of: ${reviewid}!` })
             })
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
             res.status(418).json({message: 'awww nahh now ya gone and done it!', err})
         })
+})
+
+// GET USER SPECIFIC FAVORITES
+router.get('/users/:userid/favs', (req, res) => {
+    const userid = req.params.userid
+    usersdb.getuserbyid(userid)
+    .then(founduser => {
+        // console.log(founduser)
+        favoritesdb.getFavoritesByUserID(userid)
+        .then(response => {
+            // console.log('I AM FROM THE FAVORITES GETTER',response)
+            res.status(200).json(response)
+        })
+        .catch(err => {
+            // console.log(err) 
+            res.status(400).json({message: 'you are doing something terribly wrong!'}, err)
+        })
+    })
+    .catch(err => {
+        // console.log(err)
+        res.status(418).json({message: 'awww nahh now ya gone and done it!', err})
+    })
 })
 
 module.exports = router;
