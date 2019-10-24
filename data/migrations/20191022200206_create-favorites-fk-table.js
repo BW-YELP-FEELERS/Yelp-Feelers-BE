@@ -1,11 +1,26 @@
 
 exports.up = function(knex) {
-    knex.schema.createTable('favorites', function (tbl) {
-        tbl.foreign('user_id').references('id').inTable('yfusers').comment('This is the users Foreign Key');
-        tbl.foreign('review_id').references('id').inTable('livereviews').comment('This is the review Foreign Key');
+    return knex.schema.createTable('favorites', (table) => {
+        table.increments().primary()
+
+        table.integer('user_id')
+        .unsigned()
+        .notNullable()
+
+        table.foreign('user_id')
+        .references('id')
+        .inTable('yfusers')
+
+        table.integer('review_id')
+        .unsigned()
+        .notNullable()
+
+        table.foreign('review_id')
+        .references('id')
+        .inTable('livereviews')    
     });
 };
 
 exports.down = function(knex) {
-    knex.schema.dropTableIfExists('favorites');
+    return knex.schema.dropTableIfExists('favorites');
 };
