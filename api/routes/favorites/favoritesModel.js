@@ -8,13 +8,21 @@ module.exports = {
 }
 
 // add a favorite
-function addFavorite(){
-    return null
+function addFavorite(userid, reviewid){
+    db
+    .insert({ user_id: userid, review_id: reviewid })
+    .into('favorites').returning('*')
+
+    // db('favorites')
+    // .insert({user_id: userid, review_id: reviewid})
+    // .returning('*')
+    // .where({userid})
 }
 
 // get favorites
 function getFavorite(){
-    return db('favorites')
+    return db('yfusers')
+    .leftjoin('reviews', {'yfusers.id': 'reviews_id'})
 }
 
 // get a favorite by id
@@ -23,6 +31,6 @@ function getFavoriteById(){
 }
 
 // remove a favorite
-const addFavorite = () => {
+function removeFavorite(){
     return null
 }
