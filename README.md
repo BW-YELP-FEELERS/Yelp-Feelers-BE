@@ -20,6 +20,7 @@
 ### FAVORITES
 `/users/:userid/favs/:reviewid` : Allows a USER to POST/ADD a REVIEWED ENTITY to their FAVORITES!
 `/users/:userid/favs` : RETRIEVES favorites for specified users
+`/users/:user_id/favs/:review_id/remove` : REMOVES a favorite for a specific `user'.
 ## SEEDS:
 `3 USERS`
 test1, test2, test3; all with a password of pass
