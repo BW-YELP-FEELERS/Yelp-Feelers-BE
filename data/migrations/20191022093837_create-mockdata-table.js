@@ -45,6 +45,9 @@ exports.up = function(knex) {
         reviewtable.string('user_id', 128)
         .notNullable()
 
+        reviewtable.string('name', 128)
+        .notNullable()
+
         reviewtable.text('original_text_review', 'longtext')
         .notNullable()
 

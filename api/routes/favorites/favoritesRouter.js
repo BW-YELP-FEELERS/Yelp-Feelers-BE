@@ -45,4 +45,17 @@ router.get('/users/:userid/favs', (req, res) => {
     })
 })
 
+//  GET ALL FAVORITES
+router.get('/favs', (req, res) => {
+    favoritesdb.getAllFavorites()
+    .then(response => {
+        // console.log('I AM FROM THE FAVORITES GETTER',response)
+        res.status(200).json(response)
+    })
+    .catch(err => {
+        // console.log(err)
+        res.status(418).json({message: 'awww nahh now ya gone and done it!', err})
+    })
+})
+
 module.exports = router;
