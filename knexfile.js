@@ -62,8 +62,4 @@ module.exports = {
       max: 10
     },
   },
-  dsproduction: {
-    client: 'postgresql',
-    connection: process.env.DATABASE_URL,
-  },
 };

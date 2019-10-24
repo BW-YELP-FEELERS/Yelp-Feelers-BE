@@ -14,7 +14,7 @@ exports.up = function(knex) {
         .unsigned()
         .notNullable()
         .references('id')
-        .inTable('mockreviews')    
+        .inTable('livereviews')    
         .onUpdate('CASCADE')
 
         //  this is to protect our database from having two of the same combinations of FKs.
