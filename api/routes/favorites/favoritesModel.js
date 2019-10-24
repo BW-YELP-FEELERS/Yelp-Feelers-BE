@@ -58,7 +58,7 @@ function removeFavorite(userid, recordid){
     .then(record => {
         db('favorites as f')
         .del()
-        .where('user_id', userid, 'review_id', recordid)
+        .where({user_id: userid, review_id: recordid})
         return record
     })
 }
