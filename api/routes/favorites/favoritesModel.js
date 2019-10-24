@@ -34,6 +34,23 @@ function getFavoritesByUserID(userid){
         .select('y.username', 'm.id as favoriteID', 'm.business_name', 'm.address', 'm.city', 'm.state', 'm.yelp_store_rating', 'm.original_yelp_user_rating', 'm.adjusted_sentiment_rating', 'm.name as reviewer_name', 'm.original_text_review')
         .where('f.user_id', userid)
 }
+// get all favorites in table locally
+function getAllFavorites(){
+    return db('yfusers as y')
+        .join('favorites as f', 'f.user_id', 'y.id')
+        .join('mockreviews as m', 'f.review_id', 'm.id')
+        .select('y.username', 'm.id as favoriteID', 'm.business_name', 'm.address', 'm.city', 'm.state', 'm.yelp_store_rating', 'm.original_yelp_user_rating', 'm.adjusted_sentiment_rating', 'm.name as reviewer_name', 'm.original_text_review')
+}
+
+
+// get all favorites for a particular user locally
+function getFavoritesByUserID(userid){
+    return db('yfusers as y')
+        .join('favorites as f', 'f.user_id', 'y.id')
+        .join('mockreviews as m', 'f.review_id', 'm.id')
+        .select('y.username', 'm.id as favoriteID', 'm.business_name', 'm.address', 'm.city', 'm.state', 'm.yelp_store_rating', 'm.original_yelp_user_rating', 'm.adjusted_sentiment_rating', 'm.name as reviewer_name', 'm.original_text_review')
+        .where('f.user_id', userid)
+}
 
 // remove a favorite
 function removeFavorite(){
