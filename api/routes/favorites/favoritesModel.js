@@ -59,7 +59,9 @@ function removeFavorite(userid, recordid){
         db('favorites as f')
         .del()
         .where({user_id: userid, review_id: recordid})
+        .catch(err => {console.log(err.message)})
         return record
+    .catch()
     })
 }
 
