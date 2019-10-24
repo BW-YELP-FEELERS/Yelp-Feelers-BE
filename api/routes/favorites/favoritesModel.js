@@ -9,12 +9,12 @@ module.exports = {
 
 // add a favorite
 function addFavorite(){
-    return db('')
+    return null
 }
 
 // get favorites
 function getFavorite(){
-    return null
+    return db('favorites')
 }
 
 // get a favorite by id
