@@ -32,7 +32,7 @@ router.get('/users/:userid/favs', (req, res) => {
         favoritesdb.getFavoritesByUserID(userid)
         .then(response => {
             // console.log('I AM FROM THE FAVORITES GETTER',response)
-            res.status(200).json(response)
+            res.status(200).json({loggedInUser: founduser.id, response})
         })
         .catch(err => {
             // console.log(err) 
