@@ -19,7 +19,7 @@ router.post('/users/:userid/favs/:reviewid', (req, res) => {
         })
         .catch(err => {
             // console.log(err)
-            res.status(418).json({message: 'awww nahh now ya gone and done it!', err})
+            res.status(418).json({message: 'awww nahh now ya gone and done it!', error: err.message})
         })
 })
 
@@ -41,7 +41,7 @@ router.get('/users/:userid/favs', (req, res) => {
     })
     .catch(err => {
         // console.log(err)
-        res.status(418).json({message: 'awww nahh now ya gone and done it!', err})
+        res.status(418).json({message: 'awww nahh now ya gone and done it!', error: err.message})
     })
 })
 
@@ -54,7 +54,19 @@ router.get('/favs', (req, res) => {
     })
     .catch(err => {
         // console.log(err)
-        res.status(418).json({message: 'awww nahh now ya gone and done it!', err})
+        res.status(418).json({message: 'awww nahh now ya gone and done it!', error: err.message})
+    })
+})
+
+// DELETE A DAMN FAVORITE!!  
+router.delete('/favs/:review_id/remove', (req, res) => {
+    const {review_id} = req.params
+    favoritesdb.removeFavorite(review_id)
+    .then(deleted => {
+        res.status(200).json({success: true, deleted})
+    })
+    .catch(err => {
+        res.status(500).json({success: false, error: err.message})
     })
 })
 
