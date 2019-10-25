@@ -62,14 +62,14 @@ router.get('/favs', (req, res) => {
 })
 
 // DELETE A DAMN FAVORITE!!  
-router.delete('/users/:userid/favs/:reviewid/remove', verifyuser, (req, res) => {
+router.delete('/users/:userid/favs/:reviewid/remove', (req, res) => {
     const {userid, reviewid} = req.params
     favoritesdb.removeFavorite(userid, reviewid)
     .then(deleted => {
         res.status(200).json({success: true, deleted})
     })
     .catch(err => {
-        res.status(500).json({success: false, error: err.message})
+        res.status(204).json({success: false, error: err.message})
     })
 })
 
