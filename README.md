@@ -18,9 +18,9 @@
 `/auth/reviews`: see all PROTECTED YELP FEELERS reviews (token required)
 `/auth/reviews/`: find a PROTECTED YELP FEELERS review by id  NOTE:  we can adjust this to a business_id, user_id or some other field if needed (token required)
 ### FAVORITES
-`/users/:userid/favs/:reviewid` : Allows a USER to POST/ADD a REVIEWED ENTITY to their FAVORITES!
-`/users/:userid/favs` : RETRIEVES favorites for specified users
-`/users/:user_id/favs/:review_id/remove` : REMOVES a favorite for a specific `user'.
+`/auth/users/:userid/favs/:reviewid` : Allows a USER to POST/ADD a REVIEWED ENTITY to their FAVORITES!
+`/auth/users/:userid/favs` : RETRIEVES favorites for specified users
+`/auth/users/:userid/favs/:reviewid/remove` : REMOVES a favorite for a specific `user'.
 ## SEEDS:
 `3 USERS`
 test1, test2, test3; all with a password of pass

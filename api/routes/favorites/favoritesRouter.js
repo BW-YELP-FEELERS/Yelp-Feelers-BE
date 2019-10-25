@@ -2,6 +2,9 @@ const router = require('express').Router();
 const favoritesdb = require('./favoritesModel');
 const usersdb = require('../users/usersModel')
 
+// middleware
+const {verifyuser} = require('./favsMW');
+
 // POST a favorite!
 router.post('/users/:userid/favs/:reviewid', (req, res) => {
     const{userid, reviewid} = req.params
@@ -59,9 +62,9 @@ router.get('/favs', (req, res) => {
 })
 
 // DELETE A DAMN FAVORITE!!  
-router.delete('/users/:user_id/favs/:review_id/remove', (req, res) => {
-    const {user_id, review_id} = req.params
-    favoritesdb.removeFavorite(user_id, review_id)
+router.delete('/users/:userid/favs/:reviewid/remove', verifyuser, (req, res) => {
+    const {userid, reviewid} = req.params
+    favoritesdb.removeFavorite(userid, reviewid)
     .then(deleted => {
         res.status(200).json({success: true, deleted})
     })
