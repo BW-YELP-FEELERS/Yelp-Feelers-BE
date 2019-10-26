@@ -3,9 +3,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const login = require('./loginModel');
 
+// mw
+const valuser = require('../../../utils/middleware/validateUser')
 
 
-router.post('/login', (req, res) => {
+
+router.post('/login', valuser, (req, res) => {
     const {username, password} = req.body; 
     // confirm body contains username, password
     if(username && password){

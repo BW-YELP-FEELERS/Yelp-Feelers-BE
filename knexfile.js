@@ -38,7 +38,7 @@ module.exports = {
   testing: {
     client: 'sqlite3',
     connection: {
-      filename: './data/yftest.db3'
+      filename: './data/yftesting.db3'
     },
     useNullAsDefault: true,
     migrations: {

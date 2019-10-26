@@ -3,14 +3,17 @@ const express = require('express')  // create express object
 const db = require('./registerModel')  // connect to database via models which are connected to db via knexfile
 const bcrypt = require('bcryptjs');
 
+const valuser = require('../../../utils/middleware/validateUser')
+
+
 // create router
 const router = express.Router()
 
 // Registration route
-router.post('/register', (req, res) => {
+router.post('/register', valuser, (req, res) => {
     const user = req.body  // destructuring keys off req.body object.
-    const hash = bcrypt.hashSync(user.password, 8)
-    user.password = hash 
+    const bold = process.env.PW_BOLD
+    user.password = bold 
     db(user)
     .then((newuser) => {
         res.status(201).json({Message: `Successfully registered as: ${newuser.id}`, newuser})
