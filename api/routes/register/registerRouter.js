@@ -12,7 +12,8 @@ const router = express.Router()
 // Registration route
 router.post('/register', valuser, (req, res) => {
     const user = req.body  // destructuring keys off req.body object.
-    const bold = process.env.PW_BOLD
+    const bold = bcrypt.hashSync(user.password, 8)
+    // const bold = process.env.PW_BOLD
     user.password = bold 
     db(user)
     .then((newuser) => {
